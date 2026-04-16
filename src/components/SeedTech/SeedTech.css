@@ -1,0 +1,148 @@
+.seed-tech-section {
+  padding: 120px 0;
+  background-color: transparent;
+  position: relative;
+}
+
+.seed-tech-header {
+  text-align: center;
+  margin-bottom: 80px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+.section-subtitle {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.seed-tech-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .seed-tech-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .seed-tech-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.tech-card {
+  background-color: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: transform var(--transition-normal), border-color var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+}
+
+.tech-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(19, 127, 236, 0.4);
+  box-shadow: 0 10px 40px rgba(19, 127, 236, 0.15);
+}
+
+/* Cyber Scanner Sweep on Hover */
+.tech-card::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--brand-primary);
+  box-shadow: 0 0 20px 4px var(--brand-primary);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 10;
+  transition: opacity 0.3s ease;
+}
+
+.tech-card:hover::after {
+  opacity: 0.8;
+  animation: cyberScan 2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+@keyframes cyberScan {
+  0% { top: -10%; opacity: 0; }
+  10% { opacity: 1; box-shadow: 0 0 30px 6px var(--brand-primary); }
+  90% { opacity: 1; box-shadow: 0 0 30px 6px var(--brand-primary); }
+  100% { top: 110%; opacity: 0; }
+}
+
+.tech-card-image-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 60%; /* 16:9ish aspect ratio */
+  overflow: hidden;
+}
+
+.tech-card-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.tech-card:hover .tech-card-image {
+  transform: scale(1.05);
+}
+
+.tech-card-content {
+  padding: 2rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.tech-card-title {
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.tech-card-description {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  flex: 1;
+}
+
+.tech-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: var(--brand-primary);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: opacity var(--transition-fast), gap var(--transition-fast);
+}
+
+.tech-card-link:hover {
+  opacity: 0.8;
+  gap: 0.75rem; /* arrow shifts right on hover */
+}

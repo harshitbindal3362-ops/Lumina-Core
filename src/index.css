@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Colors */
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #141414;
+  --bg-tertiary: #1f1f1f;
+  --bg-overlay: rgba(10, 10, 10, 0.85);
+
+  --text-primary: #f5f5f5;
+  --text-secondary: #a3a3a3;
+  --text-inverse: #0a0a0a;
+
+  --brand-primary: #137fec;
+  --brand-hover: #106bca;
+  
+  --border-light: rgba(255, 255, 255, 0.1);
+
+  /* Typography */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  
+  /* Shapes */
+  --radius-sm: 4px;
+  --radius-md: 8px; /* ROUND_EIGHT */
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  /* Elevations & Effects */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.5);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.5);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.7);
+  --glass-bg: rgba(20, 20, 20, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.08);
+
+  /* Animation */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 700ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* --- Layout Utilities --- */
+.container {
+  width: 100%;
+  max-width: 1376px; /* Based on stitch layout width */
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 0 48px;
+  }
+}
+
+/* Typography styles */
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.1;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #fff 0%, #a3a3a3 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* --- Global Ambient Data Stream --- */
+.app-layout {
+  position: relative;
+  z-index: 10;
+}
+
+.app-layout::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+  background-image: 
+    linear-gradient(rgba(19, 127, 236, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(19, 127, 236, 0.03) 1px, transparent 1px);
+  background-size: 100px 100px;
+  animation: bgDataDrift 60s linear infinite;
+}
+
+/* Ambient vertical light beams simulating data flow */
+.app-layout::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+  background: 
+    linear-gradient(180deg, transparent 0%, rgba(19, 127, 236, 0.02) 50%, transparent 100%);
+  background-size: 100% 200%;
+  animation: bgAmbientPulse 15s ease-in-out infinite alternate;
+}
+
+@keyframes bgDataDrift {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 100px; }
+}
+
+@keyframes bgAmbientPulse {
+  0% { background-position: 0 0%; opacity: 0.5; }
+  100% { background-position: 0 100%; opacity: 1; }
+}

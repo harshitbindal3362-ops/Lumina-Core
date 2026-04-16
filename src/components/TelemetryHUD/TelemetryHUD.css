@@ -1,0 +1,171 @@
+.telemetry-hud-wrapper {
+  position: absolute;
+  top: 50vh;
+  right: 15vw;
+  transform: translateY(-50%);
+  width: 400px;
+  height: 400px;
+  pointer-events: none;
+  z-index: 900;
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* The magic Shrink and Pin State */
+.telemetry-hud-wrapper.is-pinned {
+  position: fixed;
+  top: auto;
+  bottom: 40px;
+  right: 40px;
+  width: 160px;
+  height: 160px;
+  transform: translateY(0);
+}
+
+.telemetry-hud-wrapper.is-hidden {
+  opacity: 0 !important;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.telemetry-hud-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.telemetry-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  border: 1px solid rgba(19, 127, 236, 0.3);
+  /* The rotation is now driven by inline JS styles, no animation required */
+  will-change: transform;
+}
+
+.telemetry-ring.ring-1 {
+  width: 100%;
+  height: 100%;
+  border-top-color: var(--brand-primary);
+  border-left-color: var(--brand-primary);
+}
+
+.telemetry-ring.ring-2 {
+  width: 75%;
+  height: 75%;
+  border-bottom-color: var(--brand-primary);
+  border-right-color: var(--brand-primary);
+  border-style: dashed;
+}
+
+.telemetry-ring.ring-3 {
+  width: 50%;
+  height: 50%;
+  border: 2px solid rgba(19, 127, 236, 0.1);
+  border-top-color: #fff;
+}
+
+/* Precision Target Crosshairs */
+.telemetry-target {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120px;
+  height: 120px;
+  transform: translate(-50%, -50%);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.telemetry-hud-wrapper.is-pinned .telemetry-target {
+  width: 60px;
+  height: 60px;
+}
+
+.t-line {
+  position: absolute;
+  background: var(--brand-primary);
+}
+.t-line.h-line { top: 50%; left: -20px; right: -20px; height: 1px; transform: translateY(-50%); opacity: 0.5; }
+.t-line.v-line { left: 50%; top: -20px; bottom: -20px; width: 1px; transform: translateX(-50%); opacity: 0.5; }
+
+.t-corner {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border-color: #fff;
+  border-style: solid;
+  border-width: 0;
+  transition: all 0.8s ease;
+}
+
+.telemetry-hud-wrapper.is-pinned .t-corner {
+  width: 8px;
+  height: 8px;
+}
+
+.t-corner.tl { top: 0; left: 0; border-top-width: 2px; border-left-width: 2px; }
+.t-corner.tr { top: 0; right: 0; border-top-width: 2px; border-right-width: 2px; }
+.t-corner.bl { bottom: 0; left: 0; border-bottom-width: 2px; border-left-width: 2px; }
+.t-corner.br { bottom: 0; right: 0; border-bottom-width: 2px; border-right-width: 2px; }
+
+
+/* Digital Data Readout Overlay */
+.telemetry-readout {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: max-content;
+  text-align: center;
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 1;
+}
+
+/* Hide or squish the readout down when pinned to save space */
+.telemetry-hud-wrapper.is-pinned .telemetry-readout {
+  margin-top: 12px;
+  flex-direction: column;
+  text-align: right;
+  left: auto;
+  right: 120%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.readout-block {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: inherit;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+}
+
+.telemetry-hud-wrapper.is-pinned .readout-block {
+  justify-content: flex-end;
+  font-size: 0.65rem;
+}
+
+.readout-label {
+  color: var(--text-secondary);
+}
+
+.readout-val {
+  color: #fff;
+  font-family: monospace; /* Monospace is excellent for raw data numbers ticking up */
+  font-weight: 600;
+}
+
+.readout-val.text-brand {
+  color: var(--brand-primary);
+}
+
+@media (max-width: 1024px) {
+  .telemetry-hud-wrapper {
+    display: none; /* Often too visually noisy for narrow mobile viewports */
+  }
+}

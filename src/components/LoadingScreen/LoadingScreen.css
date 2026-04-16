@@ -1,0 +1,119 @@
+.loading-veil-container {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: auto;
+}
+
+.loading-veil {
+  position: absolute;
+  inset: 0;
+  background-color: var(--bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Fades out seamlessly precisely when the transition wipe covers the screen (at ~1s) */
+  transition: opacity 0.1s linear 1s, visibility 0.1s linear 1s;
+}
+
+.loading-veil.hide {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+  max-width: 400px;
+  padding: 24px;
+}
+
+.brand-logo {
+  font-size: 2.5rem;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.loading-divider {
+  width: 40px;
+  height: 2px;
+  background-color: var(--brand-primary);
+}
+
+.loading-subtext {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.cookie-consent-sim {
+  margin-top: 2rem;
+  padding: 1rem;
+  border-top: 1px solid var(--border-light);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.btn-primary {
+  margin-top: 1rem;
+  background-color: var(--brand-primary);
+  color: #ffffff;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.btn-primary:hover {
+  background-color: var(--brand-hover);
+  transform: translateY(-2px);
+}
+
+.btn-primary.btn-disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* -------------------------------
+   MOTION GRAPHIC SWEEP TRANSITION
+   ------------------------------- */
+.mg-layer {
+  position: absolute;
+  top: 0;
+  left: -25vw;
+  width: 150vw;
+  height: 100vh;
+  pointer-events: none;
+  transform: translateX(-100%) skewX(-20deg);
+  will-change: transform;
+}
+
+.mg-white {
+  background: #ffffff;
+  z-index: 10000;
+}
+
+.mg-green {
+  background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
+  z-index: 10001;
+}
+
+.mg-white.active {
+  animation: mgSweep 2.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+
+/* Follows closely behind the white slash */
+.mg-green.active {
+  animation: mgSweep 2.2s cubic-bezier(0.77, 0, 0.175, 1) 0.15s forwards;
+}
+
+@keyframes mgSweep {
+  0% { transform: translateX(-100%) skewX(-20deg); }
+  100% { transform: translateX(100%) skewX(20deg); }
+}

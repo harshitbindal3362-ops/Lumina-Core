@@ -1,0 +1,55 @@
+.interactive-video-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background-color: var(--bg-primary);
+}
+
+.interactive-video-container {
+  position: absolute;
+  /* Top and Left pulled back to allow massive translated movement */
+  top: -20vh;
+  left: -5vw;
+  width: 110vw;
+  height: 160vh;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.interactive-video-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.interactive-video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Darken the center-left where the hero text sits, let the edges breathe */
+  background: radial-gradient(circle at 35% 50%, rgba(10, 10, 10, 0.45) 0%, rgba(10, 10, 10, 0.6) 50%, rgba(10, 10, 10, 0.8) 100%);
+  pointer-events: none;
+  transition: background 1.5s ease;
+}
+
+/* --------------- Gateway Fly-Through Zoom Physics --------------- */
+.interactive-video-bg video {
+  transition: transform 1.8s cubic-bezier(0.7, 0, 0.3, 1), filter 1s ease;
+  transform: scale(1);
+}
+
+.bg-zoomed-in video {
+  transform: scale(2.5) translateZ(0); /* massive zoom into the field */
+}
+
+/* Darker veil when zooming in to ensure popup detail visibility */
+.bg-zoomed-in .interactive-video-overlay {
+  background: radial-gradient(circle at center, rgba(3, 3, 3, 0.6) 0%, rgba(3, 3, 3, 0.95) 100%);
+}

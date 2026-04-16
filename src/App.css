@@ -1,0 +1,18 @@
+/* Local App component specific styles, primarily managed by inline classes or component-level CSS files */
+
+/* --------------- Gateway Fly-Through Physics --------------- */
+.app-layout {
+  /* Default transform baseline so we can animate from it */
+  transform: scale(1) translateZ(0);
+  transform-origin: center 40vh; /* Aim the camera focal point roughly at the hero */
+  will-change: transform, opacity;
+  /* Very long, heavy cinematic easing duration */
+  transition: transform 1.2s cubic-bezier(0.7, 0, 0.3, 1), opacity 0.8s ease 0.2s;
+}
+
+.app-layout.gateway-fly-away {
+  /* Aggressively scale past the camera and disappear */
+  transform: scale(3.5) translateZ(400px);
+  opacity: 0 !important;
+  pointer-events: none;
+}
