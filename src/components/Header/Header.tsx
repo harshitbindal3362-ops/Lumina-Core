@@ -1,6 +1,5 @@
 import { useState, useRef } from 'react';
 import './Header.css';
-import logoWhite from '../../assets/logo_white.png';
 import customSong from '../../assets/Primavera [RteM5-tZvAQ].mp3';
 
 interface HeaderProps {
